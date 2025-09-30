@@ -1,0 +1,29 @@
+{
+    "name": "user-management-system",
+    "version": "1.0.0",
+    "description": "Full-stack user management system with geolocation",
+    "main": "index.js",
+    "scripts": {
+        "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+        "install:server": "cd server && npm install",
+        "install:client": "cd client && npm install",
+        "server": "cd server && npm start",
+        "server:dev": "cd server && npm run dev",
+        "client": "cd client && npm run dev",
+        "start": "concurrently --kill-others --names \"server,client\" --prefix-colors \"blue,green\" \"npm run server:dev\" \"npm run client\"",
+        "dev": "npm start",
+        "test": "cd server && npm test"
+    },
+    "devDependencies": {
+        "concurrently": "^7.6.0"
+    },
+    "keywords": [
+        "nodejs",
+        "react",
+        "firebase",
+        "crud",
+        "geolocation"
+    ],
+    "author": "",
+    "license": "ISC"
+}
