@@ -15,8 +15,9 @@
     
         "both": "concurrently --kill-others --names \"server,client\" --prefix-colors \"blue,green\" \"npm run server:dev\" \"npm run client:dev:alt\"",
     
-        "start": "npm run server",
-        "dev": "npm run client",
+        "sync": "rsync -av --delete /project/workspace/ /project/sandbox/",
+        "start": "npm run sync && npm run server",
+        "dev": "npm run sync && npm run client",
     
         "test": "cd server && npm test"
     },
