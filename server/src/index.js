@@ -2,10 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const config = require('./src/config/environment');
-const database = require('./src/config/database');
-const userRoutes = require('./src/routes/userRoutes');
-const errorHandler = require('./src/middleware/errorHandler');
+const config = require('./config/environment');
+const database = require('./config/database');
+const userRoutes = require('./routes/userRoutes');
+const errorHandler = require('./middleware/errorHandler');
 
 // Initialize Express app
 const app = express();
