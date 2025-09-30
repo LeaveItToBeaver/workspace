@@ -102,6 +102,16 @@ These are partially scaffolded in code or easy additions:
 - CI/CD
   - GitHub Actions workflow: install, test, coverage gate, and optional deploy.
 
+### Some QOL improvements
+
+These are things I would love to add if I have time but are necessary for a brief MVP
+
+- Capture more user data like CreatedAt, Precise Location Information, etc.
+- Add proper table sorting.
+- A dashboard to see user growth over time.
+- An interactive map component that using something like the ArcGIS API with geospatial calculations to show where our users are located.
+- Since we are gathering weather data based on a location, we might as well show the weather via a row expansion in the Data Table.
+
 ## API Summary
 
 - POST /api/users – Create (name, zipCode). Auto‑enriches with location.
