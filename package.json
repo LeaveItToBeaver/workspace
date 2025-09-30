@@ -15,7 +15,7 @@
     "both": "concurrently --kill-others --names \"server,client\" --prefix-colors \"blue,green\" \"npm run server:dev\" \"npm run client:dev\"",
 
     "start": "npm run server",
-    "dev":   "npm run client",
+    "dev": "npm run both",
 
     "test": "npm --prefix server test"
   },
