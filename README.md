@@ -20,13 +20,13 @@ Install and run:
 ```
 # from repo root
 npm run install:all
-npm start
+npm run both
 ```
 
 This launches:
 
 - Server: http://localhost:8080
-- Client: http://localhost:5173
+- Client: http://localhost:5173 (or 5174 if 5173 is taken)
 
 Health checks:
 
