@@ -7,9 +7,11 @@ import {
 import axios from "axios";
 import type { CreateUserRequest, User } from "./types";
 
-const client = axios.create({
-  baseURL: (import.meta.env.VITE_API_BASE ?? "").replace(/\/+$/, ""),
-});
+// const client = axios.create({
+//   baseURL: import.meta.env.VITE_API_BASE || "/api",
+// });
+
+const client = axios.create({ baseURL: "" });
 
 export function useUsers() {
   return useQuery({
@@ -51,7 +53,7 @@ export function useCreateUser(
           data: [
             ...previousUsers.data,
             {
-              id: `temp-${Date.now()}`, // temporary ID
+              id: `temp-${crypto.randomUUID()}`,
               name: newUser.name,
               zipCode: newUser.zipCode,
               latitude: undefined,
@@ -186,11 +188,15 @@ export function useDeleteUsers(
 
   return useMutation({
     mutationFn: async (ids: string[]) => {
-      // Delete users in parallel
       const results = await Promise.allSettled(
         ids.map((id) => client.delete(`/api/users/${id}`))
       );
-      return results;
+
+      // Return success/failure counts
+      const succeeded = results.filter((r) => r.status === "fulfilled").length;
+      const failed = results.filter((r) => r.status === "rejected").length;
+
+      return { succeeded, failed, total: ids.length, results };
     },
     onMutate: async (deletedIds) => {
       await queryClient.cancelQueries({ queryKey: ["users"] });
@@ -210,6 +216,15 @@ export function useDeleteUsers(
       }
 
       return { previousUsers };
+    },
+    onSuccess: (data) => {
+      // Show user feedback about partial failures
+      if (data.failed > 0) {
+        console.warn(
+          `Deleted ${data.succeeded} of ${data.total} users. ${data.failed} failed.`
+        );
+        // You could also set this in state to show a toast notification
+      }
     },
     onError: (err, deletedIds, context: any) => {
       if (context?.previousUsers) {

@@ -135,6 +135,17 @@ Error handling
 - Ensure Firebase credentials are configured (env or serviceAccountKey.json).
 - CORS origins are whitelisted in `server/index.js`.
 
+## CodeSandbox Deployment
+
+**Known Issue**: Firebase Admin SDK tokens are time-sensitive. When CodeSandbox VMs
+hibernate and resume, clock drift can invalidate tokens.
+
+**Solution**: Rotate Firebase service account key in CodeSandbox secrets before
+each session. This is a platform limitation and doesn't occur in production
+environments with stable system clocks (Cloud Run, ECS, EC2).
+
+For the live interview, credentials will be refreshed beforehand.
+
 ## Original requirements below:
 
 /\*
