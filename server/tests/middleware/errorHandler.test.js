@@ -46,8 +46,8 @@ describe("Error Handler Middleware", () => {
       expect(response.status).toBe(404);
       expect(response.body).toMatchObject({
         success: false,
-        error: "Invalid ID Format",
-        message: "The provided ID is not valid",
+        error: "Not Found",
+        message: "We couldn't find that user. They may have been deleted.",
       });
     });
 
